@@ -14,12 +14,24 @@
         if (newSearch !== '' & newSearch !== '?') {
           newSearch += '&';
         }
-        newSearch += 'username=' + (prompt('What is your name?') || 'anonymous');
+        var username = (prompt('What is your name?') || 'anonymous');
+        newSearch += 'username=' + username;
         window.location.search = newSearch;
+        $.ajax({
+          url: 'http://127.0.0.1:3000/classes/users',
+          type: 'POST',
+          data: {username: username},
+          success: function (data) {
+            console.log('Username added!');
+          },
+          error: function (error) {
+            console.error('chatterbox: Failed to add username', error);
+          }
+        });
       }
     </script>
     <!-- your scripts -->
-    <script src="env/config.js"></script>
+    <!-- <script src="env/config.js"></script> -->
     <script src="scripts/app.js"></script>
   </head>
   <body>

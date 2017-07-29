@@ -13,7 +13,6 @@ USE chat;
 
 
 
-
 /*  Execute this file from the command line by typing:
  *    mysql -u root < server/schema.sql
  *  to create the database and the tables.*/
@@ -33,11 +32,10 @@ USE chat;
 DROP TABLE IF EXISTS `Messages`;
     
 CREATE TABLE `Messages` (
-  `id` INTEGER NOT NULL AUTO_INCREMENT,
-  `username` MEDIUMTEXT NULL,
-  `user_id` INTEGER NULL,
-  `text` MEDIUMTEXT NULL,
-  `roomname` MEDIUMTEXT NULL,
+  `id` INTEGER AUTO_INCREMENT,
+  `user_id` INTEGER,
+  `text` VARCHAR(140) NULL DEFAULT NULL,
+  `roomname` VARCHAR(30) NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
 
@@ -49,8 +47,9 @@ CREATE TABLE `Messages` (
 DROP TABLE IF EXISTS `Users`;
     
 CREATE TABLE `Users` (
-  `id` INTEGER NOT NULL AUTO_INCREMENT,
-  `username` MEDIUMTEXT NULL,
+  `id` INTEGER AUTO_INCREMENT,
+  `username` VARCHAR(30) NULL DEFAULT NULL,
+  CONSTRAINT username UNIQUE (`username`),
   PRIMARY KEY (`id`)
 );
 
@@ -71,7 +70,7 @@ ALTER TABLE `Messages` ADD FOREIGN KEY (user_id) REFERENCES `Users` (`id`);
 -- Test Data
 -- ---
 
--- INSERT INTO `Messages` (`id`,`username`,`user_id`,`text`,`roomname`) VALUES
--- ('','','','','');
+-- INSERT INTO `Messages` (`id`,`user_id`,`text`,`roomname`) VALUES
+-- ('','','','');
 -- INSERT INTO `Users` (`id`,`username`) VALUES
 -- ('','');
