@@ -34,11 +34,10 @@ DROP TABLE IF EXISTS `Messages`;
     
 CREATE TABLE `Messages` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
-  `username` MEDIUMTEXT NOT NULL,
-  `user_id` INTEGER NULL DEFAULT NULL,
-  `text` MEDIUMTEXT NULL DEFAULT NULL,
-  `roomname` MEDIUMTEXT NOT NULL,
-  `room_id` INTEGER NULL DEFAULT NULL,
+  `username` MEDIUMTEXT NULL,
+  `user_id` INTEGER NULL,
+  `text` MEDIUMTEXT NULL,
+  `roomname` MEDIUMTEXT NULL,
   PRIMARY KEY (`id`)
 );
 
@@ -51,20 +50,7 @@ DROP TABLE IF EXISTS `Users`;
     
 CREATE TABLE `Users` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
-  `username` MEDIUMTEXT NOT NULL,
-  PRIMARY KEY (`id`)
-);
-
--- ---
--- Table 'Rooms'
--- 
--- ---
-
-DROP TABLE IF EXISTS `Rooms`;
-    
-CREATE TABLE `Rooms` (
-  `id` INTEGER NOT NULL AUTO_INCREMENT,
-  `roomname` MEDIUMTEXT NOT NULL,
+  `username` MEDIUMTEXT NULL,
   PRIMARY KEY (`id`)
 );
 
@@ -73,7 +59,6 @@ CREATE TABLE `Rooms` (
 -- ---
 
 ALTER TABLE `Messages` ADD FOREIGN KEY (user_id) REFERENCES `Users` (`id`);
-ALTER TABLE `Messages` ADD FOREIGN KEY (room_id) REFERENCES `Rooms` (`id`);
 
 -- ---
 -- Table Properties
@@ -81,15 +66,12 @@ ALTER TABLE `Messages` ADD FOREIGN KEY (room_id) REFERENCES `Rooms` (`id`);
 
 -- ALTER TABLE `Messages` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 -- ALTER TABLE `Users` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
--- ALTER TABLE `Rooms` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ---
 -- Test Data
 -- ---
 
--- INSERT INTO `Messages` (`id`,`username`,`user_id`,`text`,`roomname`,`room_id`) VALUES
--- ('','','','','','');
+-- INSERT INTO `Messages` (`id`,`username`,`user_id`,`text`,`roomname`) VALUES
+-- ('','','','','');
 -- INSERT INTO `Users` (`id`,`username`) VALUES
--- ('','');
--- INSERT INTO `Rooms` (`id`,`roomname`) VALUES
 -- ('','');
